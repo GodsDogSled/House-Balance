@@ -1,6 +1,11 @@
 import mongoose from "mongoose"
 
 const paymentGroupSchema = new mongoose.Schema({
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  groupName: String,
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
