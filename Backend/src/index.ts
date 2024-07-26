@@ -1,9 +1,11 @@
 // import mongoose from 'mongoose'
 import mongoose from 'mongoose'
 import express from 'express';
-const User = require('./models/user')
-const config = require('../utils/config')
 
+
+const config = require('../utils/config')
+const userRouter = require('./routes/users')
+const groupRouter = require('./routes/groups')
 const middleware = require('../utils/middleware')
 const logger = require('../utils/logger')
 
@@ -23,15 +25,9 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(express.static('dist'))
 app.use(middleware.requestLogger)
-app.post('/setup/test', async (_req, res) => {
-  const body = _req.body
-  console.log("body: ", _req.body);
-  const newUser = new User({
-    ...body
-  })
-  const savedUser = await newUser.save()
-  res.status(201).json(savedUser);
-});
+app.use('/users', userRouter)
+app.use('/groups', groupRouter)
+
 
 const PORT = 3000
 
