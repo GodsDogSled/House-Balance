@@ -2,6 +2,7 @@ const groupRouter = require('express').Router();
 const User = require('../models/user')
 const PaymentGroup = require('../models/paymentGroup')
 import { Request, Response } from 'express';
+const groupServices = require('../services/groupCalculations');
 
 
 groupRouter.post('/createGroup', async (_req: Request, res: Response) => {
@@ -16,7 +17,7 @@ groupRouter.post('/createGroup', async (_req: Request, res: Response) => {
     users.forEach(user => {
       console.log("user: ", user)
       user.paymentGroups = user.paymentGroups.concat(savedGroup.id)
-      user.save()
+      user.save();
     })
   } catch (error) {
     // Handle any error that occurred in any of the promises
@@ -27,9 +28,17 @@ groupRouter.post('/createGroup', async (_req: Request, res: Response) => {
 })
 
 groupRouter.get('/', async (_req: Request, res: Response) => {
-  const group = await PaymentGroup.find({}).populate('members')
-
+  const group = await PaymentGroup.find({}).populate([
+    { path: 'members' },
+    {
+      path: 'createdBy',
+      select: 'name'
+    }])
   res.json(group)
+})
+
+groupRouter.post('/addExpense', async (_req: Request, res: Response) => {
+  res.status(201).json(groupServices.splitByTwo(16));
 })
 
 module.exports = groupRouter
