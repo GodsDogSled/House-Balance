@@ -3,25 +3,27 @@ import mongoose from "mongoose"
 const paymentGroupSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
-  groupName: String,
+  groupName: { type: String, required: true },
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: true
     }
   ],
   memberDebts: [
     {
       members: [],
-      currentBalance: Number
+      currentBalance: { type: Number, required: true }
     }
   ],
   paymentHistory: [
     {
-      date: String,
-      ammountPaid: Number,
+      date: { type: String, required: true },
+      ammountPaid: { type: Number, required: true },
       usersInvolved: []
     }
   ]
@@ -39,4 +41,4 @@ paymentGroupSchema.set('toJSON', {
 
 const PaymentGroup = mongoose.model('PaymentGroup', paymentGroupSchema)
 
-module.exports = PaymentGroup
+export default PaymentGroup

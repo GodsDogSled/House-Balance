@@ -23,6 +23,7 @@
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
     "eslint": "^8.57.0",
+    "mongoose-tsgen": "^9.4.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4"
   }
