@@ -18,7 +18,7 @@ import mongoose from "mongoose"
 //   ],
 // })
 const userSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   paymentGroups: [
     {
       type: mongoose.Schema.Types.ObjectId,

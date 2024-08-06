@@ -1,4 +1,5 @@
 import { Types } from 'mongoose';
+
 export enum PaymentDivision {
   SplitByTwo = 'splitByTwo',
   EvenSplit = 'evenSplit',
@@ -15,11 +16,15 @@ export interface GroupExpense {
 }
 
 
-
-interface User {
+interface BaseUser {
   _id: Types.ObjectId;
-  name: string;
+  name: string,
 }
+
+interface UserInGroups extends BaseUser {
+  paymentGroups: Types.ObjectId[]
+}
+
 
 export interface MemberDebts {
   members: Types.ObjectId[],
@@ -49,9 +54,6 @@ interface GroupWithPayments extends BaseGroup {
   paymentHistory: PaymentHistory[]
 }
 
-export type Group = GroupNoPayments | GroupWithPayments
+export type GroupType = GroupNoPayments | GroupWithPayments
 
-export interface UserType {
-  name: String,
-  paymentGroups?: Array<Types.ObjectId>
-}
+export type UserType = BaseUser | UserInGroups

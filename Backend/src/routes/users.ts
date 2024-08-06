@@ -1,4 +1,5 @@
 const User = require('../models/user')
+import groupServices from '../services/groupServices';
 // const PaymentGroup = require('../models/paymentGroup')
 import { Request, Response } from 'express';
 const userRouter = require('express').Router();
@@ -6,12 +7,10 @@ const userRouter = require('express').Router();
 
 userRouter.get('/', async (_req: Request, res: Response) => {
   try {
-    const users = await User.find({}).populate('paymentGroups')
-
-    res.json(users)
-  } catch (error: unknown) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    const users = await groupServices.getUsers();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while fetching users' });
   }
 })
 
