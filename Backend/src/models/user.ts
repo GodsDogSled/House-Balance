@@ -1,22 +1,6 @@
 // const mongoose = require('mongoose');
 import mongoose from "mongoose"
 
-// const userSchema = new mongoose.Schema({
-//   username: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//     minlength: 3
-//   },
-//   name: String,
-//   passwordHash: String,
-//   paymentGroups: [
-//     {
-//       type: mongoose.Schema.Types.ObjectId,
-//       ref: 'paymentGroup'
-//     }
-//   ],
-// })
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   paymentGroups: [
@@ -26,10 +10,6 @@ const userSchema = new mongoose.Schema({
     }
   ],
 })
-
-
-
-
 
 userSchema.set('toJSON', {
   transform: (_document, returnedObject) => {

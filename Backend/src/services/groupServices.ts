@@ -1,6 +1,6 @@
-import { GroupType, UserType } from "../types";
-import PaymentGroup from "../models/paymentGroup";
-import User from "../models/user";
+import { GroupType, UserType } from "../types.js";
+import PaymentGroup from "../models/paymentGroup.js";
+import User from "../models/user.js";
 
 
 const getGroups = async (): Promise<GroupType[]> => {
@@ -34,3 +34,4 @@ export default {
   getGroups,
   getUsers
 }
+

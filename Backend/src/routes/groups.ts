@@ -12,7 +12,7 @@ groupRouter.get('/', async (_req: Request, res: Response) => {
   }
 });
 
-module.exports = groupRouter
+export default groupRouter
 
 // groupRouter.post('/createGroup', async (_req: Request, res: Response) => {
 //   // const newGroup = new PaymentGroup({
@@ -35,8 +35,6 @@ module.exports = groupRouter
 
 //   res.status(201).json(savedGroup)
 // })
-
-
 
 // groupRouter.post('/addExpense', async (_req: Request, res: Response) => {
 //   const groupExpense = new GroupExpense({

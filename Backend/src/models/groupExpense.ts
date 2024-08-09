@@ -30,4 +30,4 @@ groupExpense.set('toJSON', {
 
 const GroupExpense = mongoose.model('PaymentGroup', groupExpense)
 
-module.exports = GroupExpense
+export default GroupExpense

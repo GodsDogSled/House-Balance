@@ -1,8 +1,9 @@
-const User = require('../models/user')
-import groupServices from '../services/groupServices';
+import User from '../models/user.js';
+import groupServices from '../services/groupServices.js';
 // const PaymentGroup = require('../models/paymentGroup')
 import { Request, Response } from 'express';
-const userRouter = require('express').Router();
+import express from 'express';
+const userRouter = express.Router();
 
 
 userRouter.get('/', async (_req: Request, res: Response) => {
@@ -31,4 +32,4 @@ userRouter.post('/', async (_req: Request, res: Response) => {
 
 
 
-module.exports = userRouter
+export default userRouter

@@ -5,7 +5,8 @@
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "import"
   ],
   "env": {
     "browser": true,
@@ -27,7 +28,13 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "import/no-unresolved": 2,
+    "import/no-commonjs": 2,
+    "import/extensions": [
+      2,
+      "ignorePackages"
+    ]
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
