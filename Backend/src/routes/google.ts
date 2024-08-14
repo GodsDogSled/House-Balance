@@ -2,7 +2,8 @@
 import { Request, Response, Router } from 'express';
 import logger from '../../utils/logger.js';
 import 'dotenv/config'
-import { getGoogleOAuthTokens } from '../services/userService.js';
+import jwt from 'jsonwebtoken';
+import { findAndUpdateUser, getGoogleOAuthTokens, getGoogleUser } from '../services/userService.js';
 const googleRouter = Router();
 
 const redirectURI = "http://localhost:3000/api/sessions/oauth/google"
@@ -38,9 +39,23 @@ googleRouter.get("/", async (_req: Request, res: Response) => {
     console.log("id token and access token: ", { id_token, access_token })
 
     //get user with tokens
+    const googleUser = await getGoogleUser({ id_token, access_token })
+    if (!googleUser.verified_email) {
+      return res.status(403).send("Google accout is not verified")
+    }
 
     //upsert the user
-
+    const user = await findAndUpdateUser(
+      { email: googleUser.email, },
+      {
+        email: googleUser.email,
+        name: googleUser.name,
+        picture: googleUser.picture
+      }, {
+      upsert: true,
+      new: true
+    }
+    )
     //create a session
 
     //create access $ refresh tokens

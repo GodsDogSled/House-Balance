@@ -2,7 +2,7 @@
 import { Request, Response, Router } from 'express';
 const groupRouter = Router();
 // const PaymentGroup = require('../models/paymentGroup')
-import groupServices from '../services/groupServices';
+import groupServices from '../services/groupServices.js';
 groupRouter.get('/', async (_req: Request, res: Response) => {
   try {
     const groups = await groupServices.getGroups();

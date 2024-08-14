@@ -1,6 +1,6 @@
 import { GroupType, UserType } from "../types.js";
 import PaymentGroup from "../models/paymentGroup.js";
-import User from "../models/user.js";
+import UserModel from "../models/user.js";
 
 
 const getGroups = async (): Promise<GroupType[]> => {
@@ -12,7 +12,7 @@ const getGroups = async (): Promise<GroupType[]> => {
 }
 
 const getUsers = async (): Promise<UserType[]> => {
-  const users: UserType[] = await User.find({}).populate('paymentGroups').populate({
+  const users: UserType[] = await UserModel.find({}).populate('paymentGroups').populate({
     path: 'paymentGroups',
     populate: [
       {
